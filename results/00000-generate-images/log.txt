@@ -1,0 +1,20 @@
+dnnlib: Running run_generator.generate_images() on localhost...
+Loading networks from "/media/giacomo/hdd_ubuntu/Downloads/StyleGAN2_pretrained_celeba.pkl"...
+Traceback (most recent call last):
+  File "run_generator.py", line 194, in <module>
+    main()
+  File "run_generator.py", line 189, in main
+    dnnlib.submit_run(sc, func_name_map[subcmd], **kwargs)
+  File "/home/giacomo/Desktop/codice 19-08/stylegan2_mio/stylegan2-master/dnnlib/submission/submit.py", line 343, in submit_run
+    return farm.submit(submit_config, host_run_dir)
+  File "/home/giacomo/Desktop/codice 19-08/stylegan2_mio/stylegan2-master/dnnlib/submission/internal/local.py", line 22, in submit
+    return run_wrapper(submit_config)
+  File "/home/giacomo/Desktop/codice 19-08/stylegan2_mio/stylegan2-master/dnnlib/submission/submit.py", line 280, in run_wrapper
+    run_func_obj(**submit_config.run_func_kwargs)
+  File "/home/giacomo/Desktop/codice 19-08/stylegan2_mio/stylegan2-master/run_generator.py", line 39, in generate_images
+    data = pickle.load(f)
+  File "/home/giacomo/Desktop/codice 19-08/stylegan2_mio/stylegan2-master/dnnlib/tflib/network.py", line 270, in __setstate__
+    tfutil.assert_tf_initialized()
+  File "/home/giacomo/Desktop/codice 19-08/stylegan2_mio/stylegan2-master/dnnlib/tflib/tfutil.py", line 138, in assert_tf_initialized
+    raise RuntimeError("No default TensorFlow session found. Please call dnnlib.tflib.init_tf().")
+RuntimeError: No default TensorFlow session found. Please call dnnlib.tflib.init_tf().

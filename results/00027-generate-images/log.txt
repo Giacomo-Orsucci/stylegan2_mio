@@ -1,0 +1,20 @@
+dnnlib: Running run_generator.generate_images() on localhost...
+Il problema è il caricamento del decoder
+Il problema è la scelta del device
+Using device: cuda:0
+Using device: cpu
+Loading networks from "/media/giacomo/hdd_ubuntu/Downloads/StyleGAN2_pretrained_celeba.pkl"...
+Traceback (most recent call last):
+  File "run_generator.py", line 221, in <module>
+    main()
+  File "run_generator.py", line 216, in main
+    dnnlib.submit_run(sc, func_name_map[subcmd], **kwargs)
+  File "/home/giacomo/Desktop/codice 19-08/stylegan2_mio/dnnlib/submission/submit.py", line 343, in submit_run
+    return farm.submit(submit_config, host_run_dir)
+  File "/home/giacomo/Desktop/codice 19-08/stylegan2_mio/dnnlib/submission/internal/local.py", line 22, in submit
+    return run_wrapper(submit_config)
+  File "/home/giacomo/Desktop/codice 19-08/stylegan2_mio/dnnlib/submission/submit.py", line 280, in run_wrapper
+    run_func_obj(**submit_config.run_func_kwargs)
+  File "/home/giacomo/Desktop/codice 19-08/stylegan2_mio/run_generator.py", line 59, in generate_images
+    with open(network_pkl, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/media/giacomo/hdd_ubuntu/Downloads/StyleGAN2_pretrained_celeba.pkl'

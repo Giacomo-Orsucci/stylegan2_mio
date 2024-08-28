@@ -1,0 +1,5 @@
+dnnlib: Running run_generator.generate_images() on localhost...
+Il problema è il caricamento del decoder
+Il problema è la scelta del device
+Using device: cuda:0
+Using device: cuda:0

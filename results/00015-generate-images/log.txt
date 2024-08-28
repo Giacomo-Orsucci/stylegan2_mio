@@ -1,0 +1,15 @@
+dnnlib: Running run_generator.generate_images() on localhost...
+Loading networks from "/media/giacomo/hdd_ubuntu/Downloads/stylegan2_pretrained_celeba.pkl"...
+Setting up TensorFlow plugin "fused_bias_act.cu": Preprocessing... Loading... Done.
+Setting up TensorFlow plugin "upfirdn_2d.cu": Preprocessing... Loading... Done.
+generating
+generating
+generating
+generating
+generating
+generating
+generating
+generating
+generating
+generating
+dnnlib: Finished run_generator.generate_images() in 2m 13s.

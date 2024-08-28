@@ -1,0 +1,27 @@
+dnnlib: Running run_generator.generate_images() on localhost...
+Il problema è il caricamento del decoder
+Il problema è la scelta del device
+Using device: cuda:0
+Using device: cpu
+Traceback (most recent call last):
+  File "run_generator.py", line 225, in <module>
+    main()
+  File "run_generator.py", line 220, in main
+    dnnlib.submit_run(sc, func_name_map[subcmd], **kwargs)
+  File "/home/giacomo/Desktop/codice 19-08/stylegan2_mio/dnnlib/submission/submit.py", line 343, in submit_run
+    return farm.submit(submit_config, host_run_dir)
+  File "/home/giacomo/Desktop/codice 19-08/stylegan2_mio/dnnlib/submission/internal/local.py", line 22, in submit
+    return run_wrapper(submit_config)
+  File "/home/giacomo/Desktop/codice 19-08/stylegan2_mio/dnnlib/submission/submit.py", line 280, in run_wrapper
+    run_func_obj(**submit_config.run_func_kwargs)
+  File "/home/giacomo/Desktop/codice 19-08/stylegan2_mio/run_generator.py", line 45, in generate_images
+    state_dict = torch.load(decoder_path, map_location=device)
+  File "/home/giacomo/.pyenv/versions/stylegan2/lib/python3.7/site-packages/torch/serialization.py", line 795, in load
+    return _legacy_load(opened_file, map_location, pickle_module, **pickle_load_args)
+  File "/home/giacomo/.pyenv/versions/stylegan2/lib/python3.7/site-packages/torch/serialization.py", line 1002, in _legacy_load
+    magic_number = pickle_module.load(f, **pickle_load_args)
+  File "/home/giacomo/Desktop/codice 19-08/stylegan2_mio/dnnlib/tflib/network.py", line 270, in __setstate__
+    tfutil.assert_tf_initialized()
+  File "/home/giacomo/Desktop/codice 19-08/stylegan2_mio/dnnlib/tflib/tfutil.py", line 138, in assert_tf_initialized
+    raise RuntimeError("No default TensorFlow session found. Please call dnnlib.tflib.init_tf().")
+RuntimeError: No default TensorFlow session found. Please call dnnlib.tflib.init_tf().

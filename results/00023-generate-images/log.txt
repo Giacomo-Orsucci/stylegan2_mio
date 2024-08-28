@@ -1,0 +1,25 @@
+dnnlib: Running run_generator.generate_images() on localhost...
+Il problema è il caricamento del decoder
+Il problema è la scelta del device
+Using device: cuda:0
+Using device: cuda:0
+Setting up TensorFlow plugin "fused_bias_act.cu": Preprocessing... Loading... Done.
+Setting up TensorFlow plugin "upfirdn_2d.cu": Preprocessing... Loading... Done.
+Traceback (most recent call last):
+  File "run_generator.py", line 233, in <module>
+    main()
+  File "run_generator.py", line 228, in main
+    dnnlib.submit_run(sc, func_name_map[subcmd], **kwargs)
+  File "/home/giacomo/Desktop/codice 19-08/stylegan2_mio/dnnlib/submission/submit.py", line 343, in submit_run
+    return farm.submit(submit_config, host_run_dir)
+  File "/home/giacomo/Desktop/codice 19-08/stylegan2_mio/dnnlib/submission/internal/local.py", line 22, in submit
+    return run_wrapper(submit_config)
+  File "/home/giacomo/Desktop/codice 19-08/stylegan2_mio/dnnlib/submission/submit.py", line 280, in run_wrapper
+    run_func_obj(**submit_config.run_func_kwargs)
+  File "/home/giacomo/Desktop/codice 19-08/stylegan2_mio/run_generator.py", line 51, in generate_images
+    state_dict = torch.load(f, map_location=device)
+  File "/home/giacomo/.pyenv/versions/stylegan2/lib/python3.7/site-packages/torch/serialization.py", line 795, in load
+    return _legacy_load(opened_file, map_location, pickle_module, **pickle_load_args)
+  File "/home/giacomo/.pyenv/versions/stylegan2/lib/python3.7/site-packages/torch/serialization.py", line 1004, in _legacy_load
+    raise RuntimeError("Invalid magic number; corrupt file?")
+RuntimeError: Invalid magic number; corrupt file?

@@ -1,0 +1,1 @@
+{'host_name': 'localhost', 'start_time': '2024-08-23 20:23:55.577006', 'stop_time': '2024-08-23 20:23:55.577580', 'task_name': 'giacomo-00025-generate-images'}
