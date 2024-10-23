@@ -24,10 +24,17 @@ def generate_images(network_pkl, seeds, truncation_psi):
 
     dnnlib.tflib.init_tf()
 
-    decoder_path = "/home/giacomo/Desktop/enc_dec_pretrained_celeba/dec.pth"
+    
+    
+    #decoder_path = "/home/giacomo/Desktop/enc_dec_pretrained_celeba/dec.pth"
+    #decoder_path = "/media/giacomo/hdd_ubuntu/trained_byme/dec_trained_celeba/dec.pth"
+    #decoder_path = "/media/giacomo/hdd_ubuntu/new/dec.pth"
+    #decoder_path = "/media/giacomo/hdd_ubuntu/old/trained_byme/dec.pth"
+    decoder_path = "/media/giacomo/hdd_ubuntu/no_rand/enc-dec_1_20/checkpoints/dec.pth" 
+    
     fingerprint = torch.tensor([0,1,0,0,0,1,0,0,0,1,0,0,0,0,1,0,1,1,1,0,1,0,1,1,1,1,1,1,1,1,0,0,1,1,1,
                             0,1,0,0,0,0,0,1,1,1,1,1,0,1,1,0,1,0,1,0,1,1,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,
-                            0,1,0,1,1,1,0,1,0,1,0,1,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1,0])#trovata a mano sulla base dell'enc pretrained
+                            0,1,0,1,1,1,0,1,0,1,0,1,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1,0])
 
     IMAGE_RESOLUTION = 128
     IMAGE_CHANNELS = 3
@@ -80,8 +87,10 @@ def generate_images(network_pkl, seeds, truncation_psi):
         print(detected_fingerprints)
         fingerprint = (fingerprint > 0).long()
 
-        os.makedirs("/media/giacomo/hdd_ubuntu/stylegan2_gen", exist_ok=True)
-        png_filename = os.path.join("/media/giacomo/hdd_ubuntu/stylegan2_gen", f"image{seed}.png")
+        #os.makedirs("/media/giacomo/hdd_ubuntu/old/stylegan2_gen_50k_config-e_50", exist_ok=True)
+        #png_filename = os.path.join("/media/giacomo/hdd_ubuntu/old/stylegan2_gen_50k_config-e_50", f"image{seed}.png")
+        os.makedirs("/media/giacomo/hdd_ubuntu/new/stylegan2_gen_50k_config-e_50", exist_ok=True)
+        png_filename = os.path.join("/media/giacomo/hdd_ubuntu/new/stylegan2_gen_50k_config-e_50", f"image{seed}.png")
         PIL.Image.fromarray(images[0], 'RGB').save(png_filename)
         bitwise_accuracy += (detected_fingerprints == fingerprint).float().mean(dim=1).sum().item()
 
