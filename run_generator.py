@@ -30,7 +30,8 @@ def generate_images(network_pkl, seeds, truncation_psi):
     #decoder_path = "/media/giacomo/hdd_ubuntu/trained_byme/dec_trained_celeba/dec.pth"
     #decoder_path = "/media/giacomo/hdd_ubuntu/new/dec.pth"
     #decoder_path = "/media/giacomo/hdd_ubuntu/old/trained_byme/dec.pth"
-    decoder_path = "/media/giacomo/hdd_ubuntu/no_rand/enc-dec_1_20/checkpoints/dec.pth" 
+    #decoder_path = "/media/giacomo/hdd_ubuntu/no_rand/enc-dec_1_20/checkpoints/dec.pth" 
+    decoder_path = "/media/giacomo/volume/test_yuv/primo/checkpoints/dec.pth" 
     
     fingerprint = torch.tensor([0,1,0,0,0,1,0,0,0,1,0,0,0,0,1,0,1,1,1,0,1,0,1,1,1,1,1,1,1,1,0,0,1,1,1,
                             0,1,0,0,0,0,0,1,1,1,1,1,0,1,1,0,1,0,1,0,1,1,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,
@@ -51,8 +52,8 @@ def generate_images(network_pkl, seeds, truncation_psi):
     print("Using device:", device)
     device = "cpu"
     print("Using device:", device)
-    state_dict = torch.load(decoder_path, map_location=device)
-    RevealNet.load_state_dict(state_dict)
+    #state_dict = torch.load(decoder_path, map_location=device)
+    #RevealNet.load_state_dict(state_dict)
 
     bitwise_accuracy = 0
     
@@ -75,27 +76,35 @@ def generate_images(network_pkl, seeds, truncation_psi):
     if truncation_psi is not None:
         Gs_kwargs.truncation_psi = truncation_psi
 
+   
+   
+#I commented all the operations related to the bitwise accuracy calculation because I modified accuracy.py in
+#repo fingerprint_mio to calculate it. So, the procedure is to generate the images here and to calculate the accuracy
+#using accuracy.py. The basic operations to calculate bitwise accuracy don't fit because in yuv the decoder as only 1 input channel for y
+#and not 3 as for rgb.
+
+
     for seed_idx, seed in enumerate(seeds):
         print("generating")
         rnd = np.random.RandomState(seed)
         z = rnd.randn(1, *Gs.input_shape[1:]) # [minibatch, component]
         tflib.set_vars({var: rnd.randn(*var.shape.as_list()) for var in noise_vars}) # [height, width]
         images = Gs.run(z, None, **Gs_kwargs) # [minibatch, height, width, channel]
-        image_tensor = torch.from_numpy(images[0]).permute(2, 0, 1).float().to(device)
-        detected_fingerprints = RevealNet(image_tensor.unsqueeze(0))
-        detected_fingerprints = (detected_fingerprints > 0).long()
-        print(detected_fingerprints)
-        fingerprint = (fingerprint > 0).long()
+        #image_tensor = torch.from_numpy(images[0]).permute(2, 0, 1).float().to(device)
+        #detected_fingerprints = RevealNet(image_tensor.unsqueeze(0))
+        #detected_fingerprints = (detected_fingerprints > 0).long()
+        #print(detected_fingerprints)
+        #fingerprint = (fingerprint > 0).long()
 
         #os.makedirs("/media/giacomo/hdd_ubuntu/old/stylegan2_gen_50k_config-e_50", exist_ok=True)
         #png_filename = os.path.join("/media/giacomo/hdd_ubuntu/old/stylegan2_gen_50k_config-e_50", f"image{seed}.png")
-        os.makedirs("/media/giacomo/hdd_ubuntu/new/stylegan2_gen_50k_config-e_50", exist_ok=True)
-        png_filename = os.path.join("/media/giacomo/hdd_ubuntu/new/stylegan2_gen_50k_config-e_50", f"image{seed}.png")
+        os.makedirs("/media/giacomo/volume/test_yuv/stylegan2_gen_50k_config-e_25", exist_ok=True)
+        png_filename = os.path.join("/media/giacomo/volume/test_yuv/stylegan2_gen_50k_config-e_25", f"image{seed}.png")
         PIL.Image.fromarray(images[0], 'RGB').save(png_filename)
-        bitwise_accuracy += (detected_fingerprints == fingerprint).float().mean(dim=1).sum().item()
+        #bitwise_accuracy += (detected_fingerprints == fingerprint).float().mean(dim=1).sum().item()
 
-    bitwise_accuracy = bitwise_accuracy / (len(seeds))
-    print(bitwise_accuracy)
+    #bitwise_accuracy = bitwise_accuracy / (len(seeds))
+    #print(bitwise_accuracy)
 
 #----------------------------------------------------------------------------
 
