@@ -1,3 +1,6 @@
+## IMPORTANT
+This is a copy of the original work (original description, authors and acknowledgements are reported in the following) with little arrangments made by me for my thesis research work. This repository is part of the group _mio, that is a collection of code part of my thesis work.
+
 ## StyleGAN2 &mdash; Official TensorFlow Implementation
 
 ![Teaser image](./docs/stylegan2-teaser-1024x256.png)
@@ -219,4 +222,4 @@ This work is made available under the Nvidia Source Code License-NC. To view a c
 
 We thank Ming-Yu Liu for an early review, Timo Viitanen for his help with code release, and Tero Kuosmanen for compute infrastructure.
 
-- this is an arrangment of the work previously presented and the others reported in this repo and in the ones ending in _mio. This is made by me for my thesis work.
+
